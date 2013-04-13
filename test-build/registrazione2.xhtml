@@ -1,0 +1,53 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:p="http://primefaces.org/ui"  
+    template="layout/templateRegistrazione.xhtml">
+
+<ui:define name="body">
+ 
+<h:form>
+  
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+
+
+
+			<p:panel header="security Details">
+				<p:messages id="messagesso2" showDetail="false" autoUpdate="true" closable="true" />  
+				
+			<h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+				<h:outputText value="Mail: *" />
+				<h:panelGroup>
+				 <p:inputText id="mail" required="true" validator="#{mailValidator.validate}" label="Mail" value="#{utente.mailUtente}" >				
+                 <p:ajax update="messagesso2" event="blur" />  
+                </p:inputText>  
+         
+			</h:panelGroup>		
+					
+					
+					
+					<h:outputText value="Password : " />
+					<p:password id="pass" match="pwd2" label="password" value="#{utente.passUtente}" />
+					
+					<h:outputText value="Conferma Password : " />
+					<p:password id="pwd2" value="#{registrazioneManager.confermaPass}" label="conferma password" >
+					 <p:ajax update="messagesso2" event="blur" />  
+					</p:password>
+			
+			</h:panelGrid>
+			
+			</p:panel>
+			<a4j:commandButton value="ajax: pre" action="previous" immediate="true"/>
+			<a4j:commandButton value="ajax: next" action="next"/>
+	
+</h:form>
+
+	
+     
+ </ui:define>
+</ui:composition>
