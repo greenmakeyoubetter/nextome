@@ -1,0 +1,84 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:p="http://primefaces.org/ui"  
+    template="layout/templateRegistrazione.xhtml">
+
+<ui:define name="body">
+ 
+<h:form>
+  
+    
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+
+<p:panel header="Confirmation">
+			
+				<h:panelGrid id="confirmation" columns="2" columnClasses="label, value" styleClass="grid">
+				
+				
+				<h:outputText value="User name:" />
+					<h:outputText styleClass="outputLabel"
+							value="#{utente.username}" />
+				
+				<h:outputText value="Name:" />
+					<h:outputText styleClass="outputLabel"
+							value="#{utente.nomePrivato}" />
+				
+				<h:outputText value="Cognome:" />
+					<h:outputText styleClass="outputLabel"
+							value="#{utente.cognomePrivato}" />
+							
+							<h:outputText value="Data di nascita:" />
+					<h:outputText styleClass="outputLabel"
+							value="#{utente.dtNascita}" />
+							
+							<h:outputText value="Codice fiscale:" />
+					<h:outputText styleClass="outputLabel"
+							value="#{utente.codiceFiscale}" />
+							
+							<h:outputText value="Chi sei:" />
+							
+					<h:outputText styleClass="outputLabel"
+							value="#{utente.chiSono}" />
+							
+							<h:outputText value="Sesso:" />
+					<h:outputText styleClass="outputLabel"
+							value="#{utente.sesso}" />
+				
+				
+				<h:outputText value="Mail:" />
+					<h:outputText styleClass="outputLabel"
+							value="#{utente.mailUtente}" />
+						
+	
+					<h:outputText value="address: " />
+			<h:outputText styleClass="outputLabel" value="#{utente.indirizzoPrivato}" />
+			
+				<h:outputText value="Citta / cap: " />
+			<h:outputText styleClass="outputLabel" value="#{utente.zonaDomicilio.capZona} #{utente.zonaDomicilio.comuneZona.nomeComune}" />
+				
+				
+				
+				
+					
+				</h:panelGrid>
+		
+	
+	
+		<a4j:commandButton value="ajax: pre" action="#{registrazioneManager.salvaUtente}" />
+		<h:commandButton value="h: save" action="#{registrazioneManager.salvaUtente}" />		
+				
+			
+			</p:panel>
+	
+</h:form>
+
+	
+     
+ </ui:define>
+</ui:composition>

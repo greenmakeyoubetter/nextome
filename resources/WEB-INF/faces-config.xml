@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.0"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+   <application>
+      <locale-config>
+         <default-locale>it</default-locale>
+         <supported-locale>bg</supported-locale>
+         <supported-locale>de</supported-locale>
+         <supported-locale>en</supported-locale>
+         <supported-locale>fr</supported-locale>
+         <supported-locale>tr</supported-locale>
+         <supported-locale>it</supported-locale>
+         <supported-locale>da</supported-locale>
+      </locale-config>     
+   </application>
+   
+   
+   <navigation-rule> 
+   <from-view-id>/registrazione1.xhtml</from-view-id> 
+    <navigation-case> 
+      <from-outcome>next</from-outcome> 
+      <to-view-id>/registrazione2.xhtml</to-view-id> 
+    </navigation-case> 
+     <navigation-case> 
+      <from-outcome>azienda</from-outcome> 
+      <to-view-id>/registrazione1Azienda.xhtml</to-view-id> 
+    </navigation-case> 
+ </navigation-rule> 
+ 
+ <navigation-rule> 
+   <from-view-id>/registrazione2.xhtml</from-view-id> 
+    <navigation-case> 
+      <from-outcome>previous</from-outcome> 
+      <to-view-id>/registrazione1.xhtml</to-view-id> 
+    </navigation-case> 
+    <navigation-case> 
+      <from-outcome>next</from-outcome> 
+      <to-view-id>/registrazione3.xhtml</to-view-id> 
+    </navigation-case> 
+ </navigation-rule>  
+ 
+ <navigation-rule> 
+   <from-view-id>/registrazione3.xhtml</from-view-id> 
+    <navigation-case> 
+      <from-outcome>previous</from-outcome> 
+      <to-view-id>/registrazione2.xhtml</to-view-id> 
+    </navigation-case> 
+    <navigation-case> 
+      <from-outcome>next</from-outcome> 
+      <to-view-id>/registrazione.xhtml</to-view-id> 
+    </navigation-case>
+     <navigation-case>  
+     <from-action>#{registrazioneManager.salvaUtente}</from-action>
+     <from-outcome>success</from-outcome>
+     <to-view-id>/login.xhtml</to-view-id>
+    </navigation-case>   
+ </navigation-rule>  
+ 
+ <navigation-rule>
+   <from-view-id>/registrazione.xhtml</from-view-id> 
+    <navigation-case> 
+      <from-outcome>previous</from-outcome> 
+      <to-view-id>/registrazione3.xhtml</to-view-id> 
+    </navigation-case>   
+    <navigation-case>  
+     <from-action>#{registrazioneManager.salvaUtente}</from-action>
+     <from-outcome>success</from-outcome>
+     <to-view-id>/login.xhtml</to-view-id>
+    </navigation-case>   
+ </navigation-rule> 
+
+   <navigation-rule> 
+   <from-view-id>/registrazione1Azienda.xhtml</from-view-id> 
+    <navigation-case> 
+      <from-outcome>next</from-outcome> 
+      <to-view-id>/registrazione2Azienda.xhtml</to-view-id> 
+    </navigation-case> 
+ </navigation-rule> 
+ 
+ <navigation-rule> 
+   <from-view-id>/registrazione2Azienda.xhtml</from-view-id> 
+    <navigation-case> 
+      <from-outcome>previous</from-outcome> 
+      <to-view-id>/registrazione1Azienda.xhtml</to-view-id> 
+    </navigation-case> 
+    <navigation-case> 
+      <from-outcome>next</from-outcome> 
+      <to-view-id>/registrazione3Azienda.xhtml</to-view-id> 
+    </navigation-case> 
+ </navigation-rule>  
+ 
+ <navigation-rule> 
+   <from-view-id>/registrazione3Azienda.xhtml</from-view-id> 
+    <navigation-case> 
+      <from-outcome>previous</from-outcome> 
+      <to-view-id>/registrazione2Azienda.xhtml</to-view-id> 
+    </navigation-case> 
+     <navigation-case>  
+     <from-action>#{registrazioneManager.salvaUtenteAzienda}</from-action>
+     <from-outcome>success</from-outcome>
+     <to-view-id>/login.xhtml</to-view-id>
+    </navigation-case>   
+ </navigation-rule>  
+ 
+  <navigation-rule> 
+   <from-view-id>/createActivity.xhtml</from-view-id> 
+    <navigation-case> 
+      <from-outcome>next</from-outcome> 
+      <to-view-id>/createActivity2.xhtml</to-view-id> 
+    </navigation-case> 
+ </navigation-rule> 
+ 
+ <navigation-rule> 
+   <from-view-id>/create.xhtml</from-view-id> 
+    <navigation-case> 
+      <from-outcome>next</from-outcome> 
+      <to-view-id>/createActivity2.xhtml</to-view-id> 
+    </navigation-case> 
+ </navigation-rule> 
+ 
+ 
+ 
+ 
+   
+</faces-config>

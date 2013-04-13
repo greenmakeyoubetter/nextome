@@ -1,0 +1,58 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:p="http://primefaces.org/ui"  
+    template="layout/templateRegistrazione.xhtml">
+
+<ui:define name="body">
+ 
+<h:form>
+  
+    
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+
+	
+		
+
+				
+			
+			<p:panel header="Adress Details">
+				<p:messages id="messagesso3" showDetail="false" autoUpdate="true" closable="true" />  
+				
+				
+				<h:panelGrid columns="2" columnClasses="label, value">
+				<h:outputText value="Street: " />
+					<p:inputText value="#{utente.indirizzoPrivato}" validator="#{indirizzoValidator.validate}" required="true">
+					  <p:ajax update="messagesso3" event="blur" />  
+                </p:inputText>  
+				
+			
+         <h:outputText value="Citta / Zona: " />   
+         <p:selectOneMenu required="true" value="#{utente.zonaDomicilio}">
+            <f:selectItem itemLabel="Select One" itemValue="" />
+            <f:selectItems var="foo" itemLabel="#{foo.capZona} #{foo.nomeZona} #{foo.comuneZona.nomeComune}" value="#{registrazioneManager.zonaPrivato}" />
+        	<s:convertEntity/>
+        </p:selectOneMenu>
+				
+
+					
+				</h:panelGrid>
+		
+			</p:panel>
+	
+			
+		
+		<a4j:commandButton value="ajax: pre" action="previous" immediate="true" />
+		<a4j:commandButton value="ajax: next" action="next"/>		
+	
+</h:form>
+
+	
+     
+ </ui:define>
+</ui:composition>

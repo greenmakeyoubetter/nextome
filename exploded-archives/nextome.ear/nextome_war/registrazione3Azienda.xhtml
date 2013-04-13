@@ -1,0 +1,56 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:p="http://primefaces.org/ui"  
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/templateRegistrazione.xhtml">
+
+<ui:define name="body">
+ 
+<h:form>
+  
+    
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+ 
+	
+	
+			<p:panel header="Confirmation">
+			
+				<h:panelGrid id="confirmation" columns="6">
+				
+				<h:outputText value="Mail: *" />
+					<h:outputText styleClass="outputLabel"
+							value="#{utente.mailUtente}" />
+						
+					
+					<h:outputText value="User Nome: *" />
+					<h:outputText styleClass="outputLabel"
+							value="#{utente.username}" />
+					
+				
+					
+					<h:outputText value="address: " />
+			<h:outputText styleClass="outputLabel" value="#{utente.indirizzoPrivato}" />
+			
+				<h:outputText value="Citta / cap: " />
+			<h:outputText styleClass="outputLabel" value="#{utente.zonaDomicilio.capZona} #{utente.zonaDomicilio.comuneZona.nomeComune}" />
+				
+				
+				
+				
+					
+				</h:panelGrid>
+				</p:panel>
+				
+		<a4j:commandButton value="ajax: pre" action="previous" immediate="true"/>
+		<h:commandButton value="Iscriviti" action="#{registrazioneManager.salvaUtenteAzienda}"/>		
+				
+</h:form>
+   
+ </ui:define>
+</ui:composition>

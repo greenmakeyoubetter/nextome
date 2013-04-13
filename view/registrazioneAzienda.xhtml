@@ -1,0 +1,126 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:p="http://primefaces.org/ui"  
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/templateRegistrazione.xhtml">
+
+<ui:define name="body">
+ 
+<h:form>
+  
+    
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+ 
+	
+	<p:wizard widgetVar="wiz"
+			flowListener="#{registrazioneManager.onFlowProcess}" backLabel="Indietro" nextLabel="Avanti">
+	
+		<p:tab id="personal" title="Personal">
+
+			<p:panel header="Personal Details">
+		
+				<p:messages id="messagesso" showDetail="true" autoUpdate="true" closable="true" />  
+				
+				<h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+				
+					<h:outputText value="Mail: *" />
+				<h:panelGroup>
+				 <p:inputText id="mail" required="true" validator="#{mailValidator.validate}" label="Mail" value="#{utente.mailUtente}" >				
+                 <p:ajax update="growl,messagesso" event="blur" />  
+                </p:inputText>  
+         
+			</h:panelGroup>		
+			  <h:outputLabel for="firstname" value="Firstname: *" />  
+					
+					<p:inputText id="firstname" required="true" label="User name"
+							value="#{utente.username}" />
+					
+					 
+					<h:outputText value="Password : " />
+					<p:password id="pass" match="pwd2" label="password" value="#{utente.passUtente}" />
+					
+					<h:outputText value="Conferma Password : " />
+					<p:password id="pwd2" value="#{registrazioneManager.confermaPass}" label="conferma password" >
+					 <p:ajax update="messagesso" event="blur" />  
+					</p:password>
+				</h:panelGrid>
+			</p:panel>
+		</p:tab>
+			
+		<p:tab id="address" title="Address">
+			<p:panel header="Adress Details">
+			
+				<h:messages errorClass="error"/>
+				
+				<h:panelGrid columns="2" columnClasses="label, value">
+				<h:outputText value="Street: " />
+					<p:inputText value="#{utente.indirizzoSede}" />
+				
+			
+         <h:outputText value="Citta / Zona: " />   
+         <p:selectOneMenu value="#{utente.zonaSede}">
+            <f:selectItem itemLabel="Select One" itemValue="" />
+            <f:selectItems var="foo" itemLabel="#{foo.capZona} #{foo.nomeZona} #{foo.comuneZona.nomeComune}" value="#{registrazioneManager.zonaPrivato}" />
+        	<s:convertEntity/>
+        </p:selectOneMenu>
+				
+		 		
+			
+					
+					
+					
+					
+				</h:panelGrid>
+			</p:panel>
+		</p:tab>
+			
+		
+			
+		<p:tab id="confirm" title="Confirmation">
+			<p:panel header="Confirmation">
+			
+				<h:panelGrid id="confirmation" columns="6">
+				
+				<h:outputText value="Mail: *" />
+					<h:outputText styleClass="outputLabel"
+							value="#{utente.mailUtente}" />
+						
+					
+					<h:outputText value="User Nome: *" />
+					<h:outputText styleClass="outputLabel"
+							value="#{utente.username}" />
+					
+				
+					
+					<h:outputText value="address: " />
+			<h:outputText styleClass="outputLabel" value="#{utente.indirizzoPrivato}" />
+			
+				<h:outputText value="Citta / cap: " />
+			<h:outputText styleClass="outputLabel" value="#{utente.zonaDomicilio.capZona} #{utente.zonaDomicilio.comuneZona.nomeComune}" />
+				
+				
+				
+				
+					
+				</h:panelGrid>
+				
+				<p:commandButton value="Iscriviti" update="growl" 
+							actionListener="#{registrazioneManager.salvaUtenteAzienda}"/>
+			
+			</p:panel>
+		</p:tab>
+		
+	</p:wizard>
+	
+</h:form>
+
+	
+     
+ </ui:define>
+</ui:composition>

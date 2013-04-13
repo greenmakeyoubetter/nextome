@@ -1,0 +1,80 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:p="http://primefaces.org/ui"  
+    template="layout/templateRegistrazione.xhtml">
+
+<ui:define name="body">
+ 
+<h:form>
+  
+     <h:commandLink action="azienda" value="Sei un associazione, circolo, azienda ? Vai alla form dedicata" immediate="true" rendered="#{not identity.loggedIn}"/><br/><br/>
+   
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+
+	
+
+			<p:panel header="Personal Details">
+		
+				<p:messages id="messagesso2" showDetail="false" autoUpdate="true" closable="true" />  
+				
+				<h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+				
+			
+					<h:outputText value="User Name: *" />
+			<h:panelGroup>
+					<p:inputText title="Inserisci il tuo username." id="user" required="true" label="User name"
+							value="#{utente.username}" />
+						  	
+				</h:panelGroup>			
+					<h:outputText value="Nome: *" />
+					<p:inputText required="true" label="Nome"
+							value="#{utente.nomePrivato}" />
+					
+					<h:outputText value="Cognome: *" />
+					<p:inputText required="true" label="Cognome"
+							value="#{utente.nomePrivato}" />
+							
+							<h:outputText value="Codice fiscale: *" />
+					<p:inputText  validator="#{cfValidator.validate}" required="true"  label="codice fiscale"
+							value="#{utente.codiceFiscale}" >
+							  <p:ajax update="messagesso2" event="blur" />  
+                </p:inputText>  
+					
+					
+					<h:outputText value="Raccontaci chi sei: " />
+				<h:panelGroup>
+				<p:inputTextarea value="#{utente.chiSono}" rows="5" cols="30" counter="counter" maxlength="1000"       
+                            counterTemplate="{0} characters remaining." autoResize="false"/> 
+					
+					<h:outputText id="counter" />  
+				</h:panelGroup>
+					
+					
+					
+					 <h:outputText value="Data di nascita: " />  
+                    <p:inputMask value="#{utente.dtNascita}" mask="99/99/9999"/>
+					
+					 <h:outputText value="Sesso: *" />  
+        <p:selectOneMenu required="true"  value="#{utente.sesso}">  
+            <f:selectItem itemLabel="Select One" itemValue="" />  
+            <f:selectItem itemLabel="Maschio" itemValue="M" />  
+            <f:selectItem itemLabel="Femmina" itemValue="F" />  
+        </p:selectOneMenu>  
+				
+				</h:panelGrid>
+			</p:panel>
+
+	<a4j:commandButton value="ajax: next" action="next"/>
+	
+</h:form>
+
+	
+     
+ </ui:define>
+</ui:composition>

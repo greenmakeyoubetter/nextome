@@ -1,0 +1,103 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:m="http://code.google.com/p/gmaps4jsf/"
+     xmlns:a="http://richfaces.org/a4j"
+    template="layout/template.xhtml">
+  <ui:define name="body">
+   
+   
+   
+   
+ 
+   
+   
+<h:form>
+
+   <p:splitButton value="Crea" >
+      
+          <p:menuitem  url="/createActivity.seam" value="Attvita"  />
+             <p:menuitem  url="/createActivity.seam" value="Oggetto"  />
+                <p:menuitem  url="/createActivity.seam" value="Servizi"  />
+
+</p:splitButton>
+
+
+   
+<p:growl id="txt_count" showDetail="true" sticky="true" />  
+	<p:poll interval="100" 
+			listener="#{richiestaCondivisioneBean.search}" update="txt_count" async="true" global="false" />
+
+
+<div align="center">
+
+<h:panelGrid columns="3">
+
+		<p:inputText name="keyword" id="keyword" value="#{temiManager.searching}"  label="Keyword" />
+		<p:watermark for="keyword" value="Search" />
+<p:commandButton actionListener="#{temiManager.cercaString}" value="Cerca" />
+	</h:panelGrid>
+
+
+
+</div>
+
+<h:panelGrid columns="3">
+<h:panelGroup>
+    <p:panelMenu style="width:200px">  
+     <c:forEach var="d" items="#{temiManager.temaview}">
+       <h:outputText value="22" />
+        <p:submenu label="#{d.nomeTemaCategoria}">
+        
+         <c:forEach var="e" items="#{temiManager.catview}">
+         <c:if test="#{d.temaCategoriaId == e.temCategoria.temaCategoriaId}">
+            <p:menuitem value="#{e.nomeCategoria}" action="#{temiManager.cercaCategorie(e.nomeCategoria)}"/>
+         </c:if>
+      </c:forEach>      
+        </p:submenu>
+     </c:forEach>
+    </p:panelMenu>
+</h:panelGroup>
+<h:panelGroup>
+<p:tabView id="tabView"  dynamic="true" cache="true" onTabShow="findMe()">
+	<p:tab id="tab1" title="Godfather Part I">
+		<h:panelGrid columns="2" cellpadding="10">
+			<h:outputText id="tab1Text"
+				value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+				His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. T
+				hrough Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect,
+				but given to ruthless violence whenever anything stands against the good of the family." />
+		</h:panelGrid>
+	</p:tab>
+<p:tab id="tab2" title="Sulla Mappa">
+		   <h:form>
+		   <m:map jsVariable="mapHome" width="800px" height="800px" zoom="13" autoReshape="true"/>
+		   </h:form>
+	</p:tab>
+</p:tabView>
+</h:panelGroup>
+
+<h:panelGroup>
+ 
+ <p:menu>  
+       <p:menuitem  value="Richieste" outcome="/registrazione.xhtml" />  			
+       <p:menuitem value="I tuoi Preferiti" outcome="/registrazione.xhtml"/>  
+       <p:menuitem value="Interessi" outcome="/registrazione.xhtml"/>  
+       <p:menuitem value="A chi piaci" outcome="/registrazione.xhtml"/>  
+       <p:menuitem value="Social" outcome="/registrazione.xhtml"/>      
+    </p:menu>  
+</h:panelGroup>
+
+</h:panelGrid>
+</h:form>
+
+
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,107 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/templateRegistrazione.xhtml">
+
+<ui:define name="body">
+
+
+ 
+<div align="center">
+  <h:form id="loginForm">
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+
+      
+    
+       
+            <div class="dialog">
+                <h:panelGrid columns="2" >
+                
+
+<h:inputHidden value="nascosto" />
+<h:inputHidden value="#{socialProfile.profileName}" />
+<h:outputText value="Nome" rendered="#{socialProfile.nomeFB != '*'}"/>
+<h:outputText value="#{socialProfile.nomeFB}" rendered="#{socialProfile.nomeFB != '*'}"/>
+<h:outputText value="Display name" rendered="#{socialProfile.displaySocial != '*'}"/>
+<h:outputText value="#{socialProfile.displaySocial}" rendered="#{socialProfile.displaySocial != '*'}"/>
+<h:outputText value="Full name" rendered="#{socialProfile.fullName != '*'}"/>
+<h:outputText value="#{socialProfile.fullName}" rendered="#{socialProfile.fullName != '*'}"/>
+<h:outputText value="Cognome" rendered="#{socialProfile.cognomeSocial != '*'}"/>
+<h:outputText value="#{socialProfile.cognomeSocial}" rendered="#{socialProfile.cognomeSocial != '*'}" />
+<h:outputText value="Paese" rendered="#{socialProfile.countrySocial != '*'}"/>
+<h:outputText value="#{socialProfile.countrySocial}" rendered="#{socialProfile.countrySocial != '*'}"/>
+<h:outputText value="Amici" rendered="#{socialProfile.amici > 0}"/>
+<h:outputText value="#{socialProfile.amici}" rendered="#{socialProfile.amici > 0}" />
+<h:outputText value="immagine profilo" rendered="#{socialProfile.imageSocial != '*'}"/>
+<h:graphicImage id="mapImage" url="#{socialProfile.imageSocial}" rendered="#{socialProfile.imageSocial != '*'}" style=" width : 100px; height : 100px;"/> 
+  
+
+ <rich:dataTable value="#{listContact}" id="tableContact" rowClasses="rowTable"  var="cmp" rendered="false"> 
+              <rich:column>
+                <h:outputText value="#{cmp.contactName}" />
+                </rich:column>
+                 <rich:column>
+                  <h:outputText value="#{cmp.contactLastName}" />
+                  
+                  </rich:column> 
+                     <rich:column>
+                      <h:outputText value="#{cmp.contactMail}" />
+        
+        </rich:column>
+           <rich:column>
+           <h:graphicImage id="mapImage" url="#{cmp.contactImage}" style=" width : 70px; height : 70px;"/> 
+ 
+        </rich:column>
+         
+   </rich:dataTable>
+   
+   
+<h:outputText value="Mail" /> 
+<p:inputText value="#{credentials.username}" />
+<h:outputText value="Password" />  
+<p:password value="#{credentials.password}"/>
+<h:outputText value="Ricordami" /> 
+<h:selectBooleanCheckbox id="rememberMe" value="#{rememberMe.enabled}"/>
+</h:panelGrid>
+ <div class="actionButtons">
+            <p:commandButton id="submit" value="Login" action="#{identity.login}" />
+</div>
+
+            </div>
+
+        
+              
+<p:commandButton value="Connettiti con Facebook" action="#{socialManager.facebookAuthentication()}" rendered="#{profile.getProfileImageURL() == null}" />
+          
+<p:commandButton value="Connettiti con twitter" action="#{socialManager.twitterAuthentication()}" rendered="#{profile.getProfileImageURL() == null}"/>
+          
+<p:commandButton value="Connettiti con google" action="#{socialManager.googleAuthentication()}" rendered="#{profile.getProfileImageURL() == null}"/>
+
+              <h:outputText value="Non hai ancora un account Nextome . Vai alla form di registrazione." rendered="#{socialProfile.acc==false}"/>  
+             	<p:commandButton action="/registrazione1.xhtml" value="Registrati" rendered="#{socialProfile.acc==false}" />
+      
+
+    
+   
+      
+    
+<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>			
+<p:dialog modal="true"  widgetVar="statusDialog" resizable="false" draggable="false" closable="false">
+<p:graphicImage value="/img/status.gif" /></p:dialog>   
+             
+    
+     
+   </h:form>
+   
+    </div>
+    
+
+ </ui:define>
+</ui:composition>
