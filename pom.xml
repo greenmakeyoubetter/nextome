@@ -35,6 +35,7 @@
             <version>2.1.1</version>
             <configuration>
               <outputDirectory>deployments</outputDirectory>
+                 <webXml>resources\WEB-INF\web.xml</webXml>
               <warName>ROOT</warName>
             </configuration>
           </plugin>
